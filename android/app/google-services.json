@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "764269939915",
+    "firebase_url": "https://eden-eab1d-default-rtdb.firebaseio.com",
+    "project_id": "eden-eab1d",
+    "storage_bucket": "eden-eab1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764269939915:android:44b70be9a531b0e0385f4e",
+        "android_client_info": {
+          "package_name": "com.example.eden_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764269939915-7f9qoigq1noj5nibu8kidrjrlb6b453r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbjoVM3OAfxpEjSYepyompRBa3iQ_nctc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764269939915-7f9qoigq1noj5nibu8kidrjrlb6b453r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
