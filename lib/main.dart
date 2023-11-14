@@ -1,6 +1,9 @@
-import 'package:eden_test/features/auth/views/login_view.dart';
+import 'package:eden_test/localization/app_localization.dart';
+import 'package:eden_test/shared/utilities/app_routes.dart';
+import 'package:eden_test/shared/utilities/navigator_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
@@ -20,7 +23,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginView(),
+      navigatorKey: NavigatorService.navigatorKey,
+      localizationsDelegates: const [
+        AppLocalizationDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale(
+          'en',
+          '',
+        ),
+      ],
+      initialRoute: AppRoutes.loginView,
+      routes: AppRoutes.routes,
     );
   }
 }
