@@ -1,18 +1,19 @@
+import 'package:eden_test/features/auth/models/order_status_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthState {
   final bool loading;
-  final String? value;
   final LoginState loginState;
   final UserCredential? user;
-  final OrderStatus? orderStatus;
+  final OrderStatus orderStatus;
+  final DateTime? timestamp;
 
   AuthState({
-    this.value,
     this.loading = false,
     this.loginState = LoginState.loggedOut,
     this.user,
-    this.orderStatus,
+    this.orderStatus = OrderStatus.orderPlaced,
+    this.timestamp,
   });
 
   AuthState copyWith({
@@ -20,14 +21,14 @@ class AuthState {
     LoginState? loginState,
     UserCredential? user,
     OrderStatus? orderStatus,
-    String? value,
+    DateTime? timestamp,
   }) {
     return AuthState(
-      value: value ?? this.value,
       loading: loading ?? this.loading,
       loginState: loginState ?? this.loginState,
       user: user ?? this.user,
       orderStatus: orderStatus ?? this.orderStatus,
+      timestamp: timestamp ?? this.timestamp,
     );
   }
 }
@@ -37,13 +38,4 @@ enum LoginState {
   loggingIn,
   loggedIn,
   loginError,
-}
-
-enum OrderStatus {
-  orderPlaced,
-  orderAccepted,
-  orderPickUpInProgress,
-  orderOnTheWayToCustomer,
-  orderArrived,
-  orderDelivered,
 }

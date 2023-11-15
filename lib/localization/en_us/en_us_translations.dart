@@ -11,11 +11,12 @@ final Map<String, String> enUs = {
 
   // iPhone 14 Plus - Two Screen
   "lbl_dark_mode": "Dark Mode",
-  "lbl_delivery": "Delivery",
+  "lbl_delivery": "Delivery Support",
   "lbl_edit_profile": "Edit Profile",
-  "lbl_history": "History",
+  "lbl_profile": "Profile",
+  "lbl_history": "Order History",
   "lbl_log_out": "Log Out",
-  "lbl_my_orders": "My Orders",
+  "lbl_my_orders": "My Ongoing Orders",
   "lbl_settings": "Settings",
   "lbl_yesterday": "Yesterday",
   "msg_adekanmbi_ayomiposi": "Adekanmbi Ayomiposi",
@@ -52,11 +53,12 @@ final Map<String, String> enUs = {
   "lbl_order_time": "Order Time",
   "lbl_price": "Price",
   "lbl_quantity": "Quantity",
-  "lbl_track_item": "Track Item",
+  "lbl_track_item": "Track Order",
+  "lbl_order_status": "Order Status",
   "lbl_your_order": "Your order ",
-  "msg_49694nf6ckm44_has": "49694NF6CKM44 has been successfully placed",
-  "msg_order_on_the_way": "Order on the way",
-  "msg_order_pickup_in": "Order pickup in progress",
+  "msg_49694nf6ckm44_has": "has been successfully",
+  "msg_order_on_the_way": "Order On The Way",
+  "msg_order_pickup_in": "Order Pickup In Progress",
   "msg_your_order_49694nf6ckm44": "Your order 49694NF6CKM44 has been successfully placed",
 
 // Network Error String

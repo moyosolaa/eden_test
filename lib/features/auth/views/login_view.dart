@@ -70,7 +70,11 @@ class LoginView extends ConsumerWidget {
                   CustomElevatedButton(
                     text: "lbl_log_in".tr,
                     onPressed: () {
-                      onTapLogIn(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please sign in with Google instead.'),
+                        ),
+                      );
                     },
                     buttonStyle: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF3064E8),
@@ -109,14 +113,25 @@ class LoginView extends ConsumerWidget {
                   SignInButton(
                     Buttons.googleDark,
                     onPressed: () async {
-                      await ref.read(authProvider.notifier).signInWithGoogle();
-                      provider.loginState == LoginState.loggedIn ? onTapLogIn(context) : null;
+                      await ref.read(authProvider.notifier).googleSignIn().then((value) => value
+                          ? onTapLogIn(context)
+                          : ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Error logging in, please try again.'),
+                              ),
+                            ));
                     },
                   ),
                   SizedBox(height: 8.v),
                   SignInButton(
                     Buttons.gitHub,
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please sign in with Google instead.'),
+                        ),
+                      );
+                    },
                   ),
                   const Spacer(flex: 53),
                 ],
@@ -131,6 +146,6 @@ class LoginView extends ConsumerWidget {
 
   /// Navigates to the profileScreen when the action is triggered.
   onTapLogIn(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.profileView);
+    Navigator.pushReplacementNamed(context, AppRoutes.profileView);
   }
 }
