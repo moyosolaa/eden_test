@@ -1,11 +1,12 @@
 import 'package:eden_test/features/auth/controllers/auth_controller.dart';
-import 'package:eden_test/features/auth/models/auth_state_model.dart';
+import 'package:eden_test/features/auth/models/order_status_model.dart';
 import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_elevated_button.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
+import 'package:eden_test/shared/components/custom_stepper.dart';
+import 'package:eden_test/shared/constants/image_constant.dart';
 import 'package:eden_test/shared/utilities/app_routes.dart';
 import 'package:eden_test/shared/utilities/custom_text_style.dart';
-import 'package:eden_test/shared/constants/image_constant.dart';
 import 'package:eden_test/shared/utilities/size_utils.dart';
 import 'package:eden_test/shared/utilities/theme_helper.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class OrderView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AuthState provider = ref.watch(authProvider);
+    OrderStatus orderStatus = ref.watch(authProvider).orderStatus;
+    int status = ref.watch(authProvider.notifier).handleOrderStatus(orderStatus);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -41,9 +43,50 @@ class OrderView extends ConsumerWidget {
                   )
                 ],
               ),
+              SizedBox(height: 23.v),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "lbl_order_status".tr,
+                  style: CustomTextStyles.titleSmallBold,
+                ),
+              ),
+              NumberStepper(
+                totalSteps: 6,
+                width: MediaQuery.of(context).size.width,
+                curStep: status + 1,
+                stepCompleteColor: appTheme.blueA700,
+                currentStepColor: const Color(0xffdbecff),
+                inactiveColor: const Color(0xffbababa),
+                lineWidth: 3.5,
+              ),
+              SizedBox(height: 18.v),
+              Text(
+                status == 0
+                    ? 'Your order has been successfully placed'
+                    : status == 1
+                        ? 'Your order has been accepted and is being prepared by the vendor'
+                        : status == 2
+                            ? 'The rider is on his way to pick up your order from the vendor'
+                            : status == 3
+                                ? 'The rider has picked up your order and is on your way'
+                                : status == 4
+                                    ? "Don't keep the rider waiting, he's outside"
+                                    : status == 5
+                                        ? 'Enjoy!'
+                                        : '',
+                style: CustomTextStyles.titleSmallBlueA700,
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: 36.v),
-              Text('STATUS: ${provider.orderStatus.name}'),
-              SizedBox(height: 36.v),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "lbl_order_details".tr,
+                  style: CustomTextStyles.titleSmallBold,
+                ),
+              ),
+              SizedBox(height: 12.v),
               CustomImageView(
                 imagePath: ImageConstant.imgRectangle6280x380,
                 height: 280.v,
@@ -59,7 +102,7 @@ class OrderView extends ConsumerWidget {
                   onTapTrackOrder(context);
                 },
                 buttonStyle: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF3064E8),
+                  backgroundColor: appTheme.blueA700,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

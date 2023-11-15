@@ -3,8 +3,8 @@ import 'package:eden_test/features/auth/controllers/auth_controller.dart';
 import 'package:eden_test/features/auth/models/order_status_model.dart';
 import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
-import 'package:eden_test/shared/utilities/custom_text_style.dart';
 import 'package:eden_test/shared/constants/image_constant.dart';
+import 'package:eden_test/shared/utilities/custom_text_style.dart';
 import 'package:eden_test/shared/utilities/size_utils.dart';
 import 'package:eden_test/shared/utilities/theme_helper.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +77,7 @@ class TrackOrderView extends ConsumerWidget {
                             context,
                             status: "msg_order_pickup_in".tr,
                             timestamp: dateTime!,
-                            message: 'A rider is on his way to pick up your order from the vendor',
+                            message: 'The rider is on his way to pick up your order from the vendor',
                           )
                         : _buildPendingOrderStatus(context, "msg_order_pickup_in".tr),
                     status >= 3
@@ -85,7 +85,7 @@ class TrackOrderView extends ConsumerWidget {
                             context,
                             status: "msg_order_on_the_way".tr,
                             timestamp: dateTime!,
-                            message: 'A rider has picked up your order and is on your way',
+                            message: 'The rider has picked up your order and is on your way',
                           )
                         : _buildPendingOrderStatus(context, "msg_order_on_the_way".tr),
                     status >= 4
@@ -93,7 +93,7 @@ class TrackOrderView extends ConsumerWidget {
                             context,
                             status: "lbl_order_arrived".tr,
                             timestamp: dateTime!,
-                            message: 'Don’t keep the rider waiting',
+                            message: "Don't keep the rider waiting, he's outside",
                           )
                         : _buildPendingOrderStatus(context, "lbl_order_arrived".tr),
                     status >= 5
