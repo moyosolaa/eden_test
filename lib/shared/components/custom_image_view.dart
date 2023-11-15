@@ -9,12 +9,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomImageView extends StatelessWidget {
   ///[imagePath] is required parameter for showing image
   String? imagePath;
-
   double? height;
   double? width;
   Color? color;
   BoxFit? fit;
-  final String placeHolder;
+  final String errorPlaceHolder;
   Alignment? alignment;
   VoidCallback? onTap;
   EdgeInsetsGeometry? margin;
@@ -35,7 +34,7 @@ class CustomImageView extends StatelessWidget {
     this.radius,
     this.margin,
     this.border,
-    this.placeHolder = 'assets/images/image_not_found.png',
+    this.errorPlaceHolder = 'assets/images/image_not_found.png',
   });
 
   @override
@@ -97,7 +96,6 @@ class CustomImageView extends StatelessWidget {
               height: height,
               width: width,
               fit: fit ?? BoxFit.contain,
-              color: color,
             ),
           );
         case ImageType.file:
@@ -124,7 +122,7 @@ class CustomImageView extends StatelessWidget {
               ),
             ),
             errorWidget: (context, url, error) => Image.asset(
-              placeHolder,
+              errorPlaceHolder,
               height: height,
               width: width,
               fit: fit ?? BoxFit.cover,

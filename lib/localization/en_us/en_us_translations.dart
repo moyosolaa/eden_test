@@ -8,12 +8,12 @@ final Map<String, String> enUs = {
   "msg_or_continue_with": "or continue with",
 
   // ProfileView
-  "lbl_delivery": "Delivery Support",
+  "lbl_delivery": "Contact Support",
   "lbl_edit_profile": "Edit Profile",
   "lbl_profile": "Profile",
   "lbl_history": "Order History",
   "lbl_log_out": "Log Out",
-  "lbl_my_orders": "My Ongoing Orders",
+  "lbl_my_orders": "Your Ongoing Orders",
   "lbl_settings": "Settings",
   "lbl_yesterday": "Yesterday",
 
