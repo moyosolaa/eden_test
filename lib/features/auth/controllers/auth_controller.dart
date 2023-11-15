@@ -75,11 +75,11 @@ class AuthController extends StateNotifier<AuthState> {
       await subscribeToChannel();
       realtime.connection.on(ably.ConnectionEvent.connected).listen(
         (ably.ConnectionStateChange stateChange) async {
-          print('Realtime connection state changed: ${stateChange.event}');
+          log('Realtime connection state changed: ${stateChange.event}');
         },
       );
     } catch (error) {
-      print('Error creating Ably Realtime Instance: $error');
+      log('Error creating Ably Realtime Instance: $error');
       rethrow;
     }
   }
@@ -96,25 +96,25 @@ class AuthController extends StateNotifier<AuthState> {
   int handleOrderStatus(OrderStatus status) {
     switch (status) {
       case OrderStatus.orderPlaced:
-        print('Order Placed');
+        log('Order Placed');
         return 0;
       case OrderStatus.orderAccepted:
-        print('Order Accepted');
+        log('Order Accepted');
         return 1;
       case OrderStatus.orderPickUpInProgress:
-        print('Pick Up In Progress');
+        log('Pick Up In Progress');
         return 2;
       case OrderStatus.orderOnTheWayToCustomer:
-        print('On the Way to Customer');
+        log('On the Way to Customer');
         return 3;
       case OrderStatus.orderArrived:
-        print('Order Arrived');
+        log('Order Arrived');
         return 4;
       case OrderStatus.orderDelivered:
-        print('Order Delivered');
+        log('Order Delivered');
         return 5;
       default:
-        print('Unknown Order Status');
+        log('Unknown Order Status');
         return 0;
     }
   }

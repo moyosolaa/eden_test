@@ -5,7 +5,7 @@ import 'package:eden_test/shared/components/custom_elevated_button.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
 import 'package:eden_test/shared/utilities/app_routes.dart';
 import 'package:eden_test/shared/utilities/custom_text_style.dart';
-import 'package:eden_test/shared/utilities/image_constant.dart';
+import 'package:eden_test/shared/constants/image_constant.dart';
 import 'package:eden_test/shared/utilities/size_utils.dart';
 import 'package:eden_test/shared/utilities/theme_helper.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class OrderView extends ConsumerWidget {
                     width: 24.adaptSize,
                     alignment: Alignment.centerLeft,
                     onTap: () {
-                      onTapImgArrowLeft(context);
+                      onTapBack(context);
                     },
                   ),
                   const SizedBox(width: 20),
@@ -51,7 +51,7 @@ class OrderView extends ConsumerWidget {
                 radius: BorderRadius.circular(4.h),
               ),
               SizedBox(height: 16.v),
-              _buildFrameFortyOne1(context),
+              _buildOrderDetailsCard(context),
               SizedBox(height: 16.v),
               CustomElevatedButton(
                 text: "lbl_track_order".tr,
@@ -73,8 +73,7 @@ class OrderView extends ConsumerWidget {
     );
   }
 
-  /// Section Widget
-  Widget _buildFrameFortyOne1(BuildContext context) {
+  Widget _buildOrderDetailsCard(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 15.v),
       decoration: BoxDecoration(
@@ -83,36 +82,35 @@ class OrderView extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildFrameThirtyNine(context, orderID: "lbl_order_name".tr, nFCKMFortyFour: "lbl_non_stick_pot".tr),
+          _buildOrderDetails(context, item: "lbl_order_name".tr, value: "lbl_non_stick_pot".tr),
           SizedBox(height: 7.v),
-          _buildFrameThirtyNine(context, orderID: "lbl_order_id".tr, nFCKMFortyFour: "lbl_49694nf6ckm44".tr),
+          _buildOrderDetails(context, item: "lbl_order_id".tr, value: "lbl_49694nf6ckm44".tr),
           SizedBox(height: 7.v),
-          _buildFrameThirtyNine(context, orderID: "lbl_order_time".tr, nFCKMFortyFour: "lbl_13_11_23_8_49pm".tr),
+          _buildOrderDetails(context, item: "lbl_order_time".tr, value: "lbl_13_11_23_8_49pm".tr),
           SizedBox(height: 6.v),
-          _buildFrameThirtyNine(context, orderID: "lbl_quantity".tr, nFCKMFortyFour: "lbl_2".tr),
+          _buildOrderDetails(context, item: "lbl_quantity".tr, value: "lbl_2".tr),
           SizedBox(height: 6.v),
-          _buildFrameThirtyNine(context, orderID: "lbl_price".tr, nFCKMFortyFour: "lbl_29_99".tr)
+          _buildOrderDetails(context, item: "lbl_price".tr, value: "lbl_29_99".tr)
         ],
       ),
     );
   }
 
-  /// Common widget
-  Widget _buildFrameThirtyNine(
+  Widget _buildOrderDetails(
     BuildContext context, {
-    required String orderID,
-    required String nFCKMFortyFour,
+    required String item,
+    required String value,
   }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(orderID, style: theme.textTheme.titleSmall!.copyWith(color: theme.colorScheme.secondaryContainer)),
-        Text(nFCKMFortyFour, style: theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.secondaryContainer))
+        Text(item, style: theme.textTheme.titleSmall!.copyWith(color: theme.colorScheme.secondaryContainer)),
+        Text(value, style: theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.secondaryContainer))
       ],
     );
   }
 
-  onTapImgArrowLeft(BuildContext context) {
+  onTapBack(BuildContext context) {
     Navigator.pop(context);
   }
 

@@ -4,7 +4,7 @@ import 'package:eden_test/features/auth/models/order_status_model.dart';
 import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
 import 'package:eden_test/shared/utilities/custom_text_style.dart';
-import 'package:eden_test/shared/utilities/image_constant.dart';
+import 'package:eden_test/shared/constants/image_constant.dart';
 import 'package:eden_test/shared/utilities/size_utils.dart';
 import 'package:eden_test/shared/utilities/theme_helper.dart';
 import 'package:flutter/material.dart';
