@@ -19,6 +19,7 @@ dependencies:
   flutter_localization: ^0.1.14
   flutter_riverpod: ^2.4.6
   flutter_svg: ^2.0.9
+  github_sign_in_plus: ^0.0.2
   google_sign_in: ^6.1.6
   intl: any
   sign_in_button: ^3.2.0

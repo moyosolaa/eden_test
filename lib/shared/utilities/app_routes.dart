@@ -1,7 +1,7 @@
 import 'package:eden_test/features/auth/views/login_view.dart';
-import 'package:eden_test/features/auth/views/order_details_view.dart';
-import 'package:eden_test/features/auth/views/track_order_view.dart';
-import 'package:eden_test/features/auth/views/profile_view.dart';
+import 'package:eden_test/features/orders/views/order_details_view.dart';
+import 'package:eden_test/features/orders/views/track_order_view.dart';
+import 'package:eden_test/features/profile/views/profile_view.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {

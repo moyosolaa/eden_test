@@ -4,9 +4,9 @@ import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_elevated_button.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
 import 'package:eden_test/shared/components/custom_text_form_field.dart';
+import 'package:eden_test/shared/constants/image_constant.dart';
 import 'package:eden_test/shared/utilities/app_routes.dart';
 import 'package:eden_test/shared/utilities/custom_text_style.dart';
-import 'package:eden_test/shared/constants/image_constant.dart';
 import 'package:eden_test/shared/utilities/loader.dart';
 import 'package:eden_test/shared/utilities/size_utils.dart';
 import 'package:eden_test/shared/utilities/theme_helper.dart';
@@ -125,12 +125,14 @@ class LoginView extends ConsumerWidget {
                   SizedBox(height: 8.v),
                   SignInButton(
                     Buttons.gitHub,
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please sign in with Google instead.'),
-                        ),
-                      );
+                    onPressed: () async {
+                      await ref.read(authProvider.notifier).githubSignIn(context).then((value) => value
+                          ? onTapLogIn(context)
+                          : ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Error logging in, please try again.'),
+                              ),
+                            ));
                     },
                   ),
                   const Spacer(flex: 53),

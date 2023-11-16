@@ -1,6 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:eden_test/features/auth/controllers/auth_controller.dart';
-import 'package:eden_test/features/auth/models/order_status_model.dart';
+import 'package:eden_test/features/orders/models/order_status_model.dart';
 import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
 import 'package:eden_test/shared/constants/image_constant.dart';

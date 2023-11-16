@@ -1,4 +1,4 @@
-import 'package:eden_test/features/auth/models/order_status_model.dart';
+import 'package:eden_test/features/orders/models/order_status_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthState {
