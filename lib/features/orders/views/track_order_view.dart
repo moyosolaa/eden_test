@@ -1,5 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:eden_test/features/auth/controllers/auth_controller.dart';
+import 'package:eden_test/features/orders/controllers/order_controller.dart';
 import 'package:eden_test/features/orders/models/order_status_model.dart';
 import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
@@ -15,9 +15,9 @@ class TrackOrderView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    OrderStatus orderStatus = ref.watch(authProvider).orderStatus;
-    DateTime? dateTime = ref.watch(authProvider).timestamp;
-    int status = ref.watch(authProvider.notifier).handleOrderStatus(orderStatus);
+    OrderStatusEnum orderStatus = ref.watch(orderProvider).orderStatus;
+    DateTime? dateTime = ref.watch(orderProvider).timestamp;
+    int status = ref.watch(orderProvider.notifier).handleOrderStatus(orderStatus);
     return Scaffold(
       body: SafeArea(
         child: Padding(

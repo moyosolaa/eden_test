@@ -1,4 +1,4 @@
-import 'package:eden_test/features/auth/controllers/auth_controller.dart';
+import 'package:eden_test/features/orders/controllers/order_controller.dart';
 import 'package:eden_test/features/orders/models/order_status_model.dart';
 import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_elevated_button.dart';
@@ -17,8 +17,8 @@ class OrderView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    OrderStatus orderStatus = ref.watch(authProvider).orderStatus;
-    int status = ref.watch(authProvider.notifier).handleOrderStatus(orderStatus);
+    OrderStatusEnum orderStatus = ref.watch(orderProvider).orderStatus;
+    int status = ref.watch(orderProvider.notifier).handleOrderStatus(orderStatus);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -54,7 +54,7 @@ class OrderView extends ConsumerWidget {
               NumberStepper(
                 totalSteps: 6,
                 width: MediaQuery.of(context).size.width,
-                curStep: status + 1,
+                curStep: status + 2,
                 stepCompleteColor: appTheme.blueA700,
                 currentStepColor: const Color(0xffdbecff),
                 inactiveColor: const Color(0xffbababa),
@@ -78,6 +78,19 @@ class OrderView extends ConsumerWidget {
                 style: CustomTextStyles.titleSmallBlueA700,
                 textAlign: TextAlign.center,
               ),
+              SizedBox(height: 16.v),
+              CustomElevatedButton(
+                text: "lbl_track_order".tr,
+                onPressed: () {
+                  onTapTrackOrder(context);
+                },
+                buttonStyle: ElevatedButton.styleFrom(
+                  backgroundColor: appTheme.blueA700,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
               SizedBox(height: 36.v),
               Align(
                 alignment: Alignment.centerLeft,
@@ -95,19 +108,6 @@ class OrderView extends ConsumerWidget {
               ),
               SizedBox(height: 16.v),
               _buildOrderDetailsCard(context),
-              SizedBox(height: 16.v),
-              CustomElevatedButton(
-                text: "lbl_track_order".tr,
-                onPressed: () {
-                  onTapTrackOrder(context);
-                },
-                buttonStyle: ElevatedButton.styleFrom(
-                  backgroundColor: appTheme.blueA700,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
               SizedBox(height: 5.v)
             ],
           ),

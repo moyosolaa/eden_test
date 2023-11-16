@@ -113,7 +113,7 @@ class LoginView extends ConsumerWidget {
                   SignInButton(
                     Buttons.googleDark,
                     onPressed: () async {
-                      await ref.read(authProvider.notifier).googleSignIn().then((value) => value
+                      await ref.read(authProvider.notifier).googleSignIn(ref).then((value) => value
                           ? onTapLogIn(context)
                           : ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -126,7 +126,7 @@ class LoginView extends ConsumerWidget {
                   SignInButton(
                     Buttons.gitHub,
                     onPressed: () async {
-                      await ref.read(authProvider.notifier).githubSignIn(context).then((value) => value
+                      await ref.read(authProvider.notifier).githubSignIn(context, ref).then((value) => value
                           ? onTapLogIn(context)
                           : ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(

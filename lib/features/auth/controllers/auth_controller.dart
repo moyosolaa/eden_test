@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ably_flutter/ably_flutter.dart' as ably;
 import 'package:eden_test/features/auth/models/auth_state_model.dart';
+import 'package:eden_test/features/orders/controllers/order_controller.dart';
 import 'package:eden_test/features/orders/models/order_status_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class AuthController extends StateNotifier<AuthState> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   ably.RealtimeChannel? channel;
 
-  Future<bool> googleSignIn() async {
+  Future<bool> googleSignIn(WidgetRef? ref) async {
     state = state.copyWith(loading: true, loginState: LoginState.loggingIn);
     try {
       final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
@@ -35,7 +36,7 @@ class AuthController extends StateNotifier<AuthState> {
         user: user,
         loginState: LoginState.loggedIn,
       );
-      await createAblyRealtimeInstance();
+      await ref!.watch(orderProvider.notifier).createAblyRealtimeInstance(ref);
       return true;
     } catch (error) {
       log(error.toString());
@@ -44,13 +45,13 @@ class AuthController extends StateNotifier<AuthState> {
     }
   }
 
-  Future<bool> githubSignIn(BuildContext context) async {
+  Future<bool> githubSignIn(BuildContext context, WidgetRef? ref) async {
     state = state.copyWith(loading: true, loginState: LoginState.loggingIn);
     try {
       final GitHubSignIn gitHubSignIn = GitHubSignIn(
         clientId: '507ba3bbe5e0e79808d0',
         clientSecret: '9946b66251452b145d29d71a6efca18dbf9a7a1d',
-        redirectUrl: 'https://github.com/moyosolaa',
+        redirectUrl: 'https://eden-eab1d.firebaseapp.com/__/auth/handler',
       );
       final GitHubSignInResult result = await gitHubSignIn.signIn(context);
       final AuthCredential credential = GithubAuthProvider.credential(result.token!);
@@ -60,7 +61,7 @@ class AuthController extends StateNotifier<AuthState> {
         user: user,
         loginState: LoginState.loggedIn,
       );
-      await createAblyRealtimeInstance();
+      await ref!.watch(orderProvider.notifier).createAblyRealtimeInstance(ref);
       return true;
     } catch (error) {
       log(error.toString());
@@ -79,7 +80,7 @@ class AuthController extends StateNotifier<AuthState> {
           loading: false,
           user: null,
           loginState: LoginState.loggedOut,
-          orderStatus: OrderStatus.orderPlaced,
+          orderStatus: OrderStatusEnum.orderPlaced,
           timestamp: null,
         );
       });
@@ -90,61 +91,4 @@ class AuthController extends StateNotifier<AuthState> {
       return false;
     }
   }
-
-  Future<void> createAblyRealtimeInstance() async {
-    var clientOptions = ably.ClientOptions(
-      key: 'oiDOrA.HnDEIw:_vcQQwIA8iy1HEPQVKTenBUnaC6LUY7VvueQ7993uZs',
-      clientId: state.user!.user!.uid,
-    );
-    try {
-      ably.Realtime realtime = ably.Realtime(options: clientOptions);
-      channel = realtime.channels.get('order-status');
-      await subscribeToChannel();
-      realtime.connection.on(ably.ConnectionEvent.connected).listen(
-        (ably.ConnectionStateChange stateChange) async {
-          log('Realtime connection state changed: ${stateChange.event}');
-        },
-      );
-    } catch (error) {
-      log('Error creating Ably Realtime Instance: $error');
-      rethrow;
-    }
-  }
-
-  Future<void> subscribeToChannel() async {
-    var messageStream = channel!.subscribe();
-    messageStream.listen((ably.Message message) {
-      var orderStatus = OrderStatus.values.firstWhere((e) => message.name!.toLowerCase() == e.name.toLowerCase());
-      var timestamp = message.timestamp;
-      state = state.copyWith(orderStatus: orderStatus, timestamp: timestamp);
-    });
-  }
-
-  int handleOrderStatus(OrderStatus status) {
-    switch (status) {
-      case OrderStatus.orderPlaced:
-        log('Order Placed');
-        return 0;
-      case OrderStatus.orderAccepted:
-        log('Order Accepted');
-        return 1;
-      case OrderStatus.orderPickUpInProgress:
-        log('Pick Up In Progress');
-        return 2;
-      case OrderStatus.orderOnTheWayToCustomer:
-        log('On the Way to Customer');
-        return 3;
-      case OrderStatus.orderArrived:
-        log('Order Arrived');
-        return 4;
-      case OrderStatus.orderDelivered:
-        log('Order Delivered');
-        return 5;
-      default:
-        log('Unknown Order Status');
-        return 0;
-    }
-  }
-
-  // curl -X POST https://realtime.ably.io/channels/order-status/messages -u "oiDOrA.HnDEIw:_vcQQwIA8iy1HEPQVKTenBUnaC6LUY7VvueQ7993uZs" -H "Content-Type: application/json"  --data '{ "name": "xpendingnnnn" }'
 }
