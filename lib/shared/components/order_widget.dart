@@ -1,7 +1,8 @@
+import 'package:eden_test/features/orders/models/order_status_model.dart';
 import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
-import 'package:eden_test/shared/utilities/custom_text_style.dart';
 import 'package:eden_test/shared/constants/image_constant.dart';
+import 'package:eden_test/shared/utilities/custom_text_style.dart';
 import 'package:eden_test/shared/utilities/size_utils.dart';
 import 'package:eden_test/shared/utilities/theme_helper.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,11 @@ class OrderWidget extends StatelessWidget {
   const OrderWidget({
     Key? key,
     this.onTapFrame,
+    required this.status,
   }) : super(key: key);
 
   final VoidCallback? onTapFrame;
+  final OrderStatusEnum status;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class OrderWidget extends StatelessWidget {
                       ),
                       SizedBox(height: 5.v),
                       Text(
-                        "lbl_yesterday".tr,
+                        "Status: ${status.name}",
                         style: CustomTextStyles.bodySmallGray500,
                       ),
                     ],

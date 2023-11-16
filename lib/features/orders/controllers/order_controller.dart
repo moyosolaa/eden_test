@@ -13,6 +13,7 @@ class OrderController extends StateNotifier<OrderState> {
   OrderController() : super(OrderState());
 
   ably.RealtimeChannel? channel;
+  OrderStatusEnum? orderStatusEnum;
 
   Future<void> createAblyRealtimeInstance(WidgetRef ref) async {
     var clientOptions = ably.ClientOptions(
@@ -22,7 +23,7 @@ class OrderController extends StateNotifier<OrderState> {
     try {
       ably.Realtime realtime = ably.Realtime(options: clientOptions);
       channel = realtime.channels.get('order-status');
-      await subscribeToChannel();
+      await subscribeToOrderChannel();
       realtime.connection.on(ably.ConnectionEvent.connected).listen(
         (ably.ConnectionStateChange stateChange) async {
           log('Realtime connection state changed: ${stateChange.event}');
@@ -34,11 +35,15 @@ class OrderController extends StateNotifier<OrderState> {
     }
   }
 
-  Future<void> subscribeToChannel() async {
+  Future<void> subscribeToOrderChannel() async {
     var messageStream = channel!.subscribe();
     messageStream.listen((ably.Message message) {
-      var orderStatusEnum =
-          OrderStatusEnum.values.firstWhere((e) => message.name!.toLowerCase() == e.name.toLowerCase());
+      orderStatusEnum = message.data == null
+          ? null
+          : OrderStatusEnum.values.firstWhere(
+              (e) => message.data.toString().toLowerCase() == e.name.toLowerCase(),
+              orElse: () => orderStatusEnum ?? OrderStatusEnum.ORDER_PLACED,
+            );
       var timestamp = message.timestamp;
       state = state.copyWith(orderStatus: orderStatusEnum, timestamp: timestamp);
     });
@@ -46,29 +51,21 @@ class OrderController extends StateNotifier<OrderState> {
 
   int handleOrderStatus(OrderStatusEnum status) {
     switch (status) {
-      case OrderStatusEnum.orderPlaced:
-        log('Order Placed');
+      case OrderStatusEnum.ORDER_PLACED:
         return 0;
-      case OrderStatusEnum.orderAccepted:
-        log('Order Accepted');
+      case OrderStatusEnum.ORDER_ACCEPTED:
         return 1;
-      case OrderStatusEnum.orderPickUpInProgress:
-        log('Pick Up In Progress');
+      case OrderStatusEnum.ORDER_PICK_UP_IN_PROGRESS:
         return 2;
-      case OrderStatusEnum.orderOnTheWayToCustomer:
-        log('On the Way to Customer');
+      case OrderStatusEnum.ORDER_ON_THE_WAY_TO_CUSTOMER:
         return 3;
-      case OrderStatusEnum.orderArrived:
-        log('Order Arrived');
+      case OrderStatusEnum.ORDER_ARRIVED:
         return 4;
-      case OrderStatusEnum.orderDelivered:
-        log('Order Delivered');
+      case OrderStatusEnum.ORDER_DELIVERED:
         return 5;
       default:
         log('Unknown Order Status');
         return 0;
     }
   }
-
-  // curl -X POST https://realtime.ably.io/channels/order-status/messages -u "oiDOrA.HnDEIw:_vcQQwIA8iy1HEPQVKTenBUnaC6LUY7VvueQ7993uZs" -H "Content-Type: application/json"  --data '{ "name": "xpendingnnnn" }'
 }

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:ably_flutter/ably_flutter.dart' as ably;
 import 'package:eden_test/features/auth/models/auth_state_model.dart';
 import 'package:eden_test/features/orders/controllers/order_controller.dart';
-import 'package:eden_test/features/orders/models/order_status_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +20,7 @@ class AuthController extends StateNotifier<AuthState> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   ably.RealtimeChannel? channel;
 
-  Future<bool> googleSignIn(WidgetRef? ref) async {
+  Future<bool> googleSignIn(WidgetRef ref) async {
     state = state.copyWith(loading: true, loginState: LoginState.loggingIn);
     try {
       final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
@@ -36,7 +35,7 @@ class AuthController extends StateNotifier<AuthState> {
         user: user,
         loginState: LoginState.loggedIn,
       );
-      await ref!.watch(orderProvider.notifier).createAblyRealtimeInstance(ref);
+      await ref.watch(orderProvider.notifier).createAblyRealtimeInstance(ref);
       return true;
     } catch (error) {
       log(error.toString());
@@ -45,7 +44,7 @@ class AuthController extends StateNotifier<AuthState> {
     }
   }
 
-  Future<bool> githubSignIn(BuildContext context, WidgetRef? ref) async {
+  Future<bool> githubSignIn(BuildContext context, WidgetRef ref) async {
     state = state.copyWith(loading: true, loginState: LoginState.loggingIn);
     try {
       final GitHubSignIn gitHubSignIn = GitHubSignIn(
@@ -61,7 +60,7 @@ class AuthController extends StateNotifier<AuthState> {
         user: user,
         loginState: LoginState.loggedIn,
       );
-      await ref!.watch(orderProvider.notifier).createAblyRealtimeInstance(ref);
+      await ref.watch(orderProvider.notifier).createAblyRealtimeInstance(ref);
       return true;
     } catch (error) {
       log(error.toString());
@@ -80,8 +79,6 @@ class AuthController extends StateNotifier<AuthState> {
           loading: false,
           user: null,
           loginState: LoginState.loggedOut,
-          orderStatus: OrderStatusEnum.orderPlaced,
-          timestamp: null,
         );
       });
       return true;

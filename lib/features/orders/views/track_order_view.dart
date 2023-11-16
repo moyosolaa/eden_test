@@ -149,13 +149,39 @@ class TrackOrderView extends ConsumerWidget {
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(horizontal: 23.h, vertical: 14.v),
           decoration: BoxDecoration(
-            border: Border.all(color: appTheme.blueA700, width: 1.h),
+            border: Border.all(color: appTheme.blueA700, width: 2.h),
           ),
           child: Column(
             children: [
-              Text(status.tr, style: CustomTextStyles.titleSmallBlueA700),
-              SizedBox(height: 5.v),
-              Text(message, style: theme.textTheme.bodySmall, maxLines: 2),
+              Row(
+                children: [
+                  Container(
+                    width: 20.0,
+                    height: 20.0,
+                    decoration: BoxDecoration(
+                      color: appTheme.blueA700,
+                      borderRadius: const BorderRadius.all(Radius.circular(25.0)),
+                    ),
+                    child: const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 12.0,
+                    ),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Text(status.tr, style: CustomTextStyles.titleSmallBlueA700),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.v),
+              Text(
+                message,
+                style: theme.textTheme.bodySmall,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: 4.v),
               Text(timestamp == null ? '2023-11-15 17:00:00' : timestamp.toString(),
                   style: CustomTextStyles.bodySmallGray600)

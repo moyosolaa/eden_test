@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class OrderState {
   final bool loading;
   final OrderStatusEnum orderStatus;
@@ -5,7 +7,7 @@ class OrderState {
 
   OrderState({
     this.loading = false,
-    this.orderStatus = OrderStatusEnum.orderPlaced,
+    this.orderStatus = OrderStatusEnum.ORDER_PLACED,
     this.timestamp,
   });
 
@@ -23,10 +25,10 @@ class OrderState {
 }
 
 enum OrderStatusEnum {
-  orderPlaced,
-  orderAccepted,
-  orderPickUpInProgress,
-  orderOnTheWayToCustomer,
-  orderArrived,
-  orderDelivered,
+  ORDER_PLACED,
+  ORDER_ACCEPTED,
+  ORDER_PICK_UP_IN_PROGRESS,
+  ORDER_ON_THE_WAY_TO_CUSTOMER,
+  ORDER_ARRIVED,
+  ORDER_DELIVERED,
 }

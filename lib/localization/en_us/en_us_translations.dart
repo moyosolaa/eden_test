@@ -31,7 +31,7 @@ final Map<String, String> enUs = {
   "lbl_2": "2",
   "lbl_29_99": "\$29.99",
   "lbl_49694nf6ckm44": "49694NF6CKM44",
-  "lbl_non_stick_pot": "Non-Stick Pot",
+  "lbl_non_stick_pot": "Sweet Chilli Chicken",
   "lbl_order_accepted": "Order Accepted",
   "lbl_order_arrived": "Order Arrived",
   "lbl_order_delivered": "Order Delivered",

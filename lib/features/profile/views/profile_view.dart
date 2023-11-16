@@ -1,5 +1,7 @@
 import 'package:eden_test/features/auth/controllers/auth_controller.dart';
 import 'package:eden_test/features/auth/models/auth_state_model.dart';
+import 'package:eden_test/features/orders/controllers/order_controller.dart';
+import 'package:eden_test/features/orders/models/order_status_model.dart';
 import 'package:eden_test/localization/app_localization.dart';
 import 'package:eden_test/shared/components/custom_image_view.dart';
 import 'package:eden_test/shared/components/order_widget.dart';
@@ -71,7 +73,7 @@ class ProfileView extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 12.v),
-                          _orderWidget(context),
+                          _orderWidget(context, ref),
                           SizedBox(height: 36.v),
                           Align(
                             alignment: Alignment.centerLeft,
@@ -127,7 +129,8 @@ class ProfileView extends ConsumerWidget {
     );
   }
 
-  Widget _orderWidget(BuildContext context) {
+  Widget _orderWidget(BuildContext context, WidgetRef ref) {
+    OrderStatusEnum orderStatus = ref.watch(orderProvider).orderStatus;
     return Padding(
       padding: EdgeInsets.only(left: 1.h),
       child: ListView.separated(
@@ -139,6 +142,7 @@ class ProfileView extends ConsumerWidget {
         itemCount: 1,
         itemBuilder: (context, index) {
           return OrderWidget(
+            status: orderStatus,
             onTapFrame: () {
               onTapOrder(context);
             },
