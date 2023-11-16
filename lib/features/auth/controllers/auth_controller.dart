@@ -18,6 +18,11 @@ class AuthController extends StateNotifier<AuthState> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GitHubSignIn _gitHubSignIn = GitHubSignIn(
+    clientId: '507ba3bbe5e0e79808d0',
+    clientSecret: '9946b66251452b145d29d71a6efca18dbf9a7a1d',
+    redirectUrl: 'https://github.com/moyosolaa',
+  );
   ably.RealtimeChannel? channel;
 
   Future<bool> googleSignIn(WidgetRef ref) async {
@@ -47,12 +52,7 @@ class AuthController extends StateNotifier<AuthState> {
   Future<bool> githubSignIn(BuildContext context, WidgetRef ref) async {
     state = state.copyWith(loading: true, loginState: LoginState.loggingIn);
     try {
-      final GitHubSignIn gitHubSignIn = GitHubSignIn(
-        clientId: '507ba3bbe5e0e79808d0',
-        clientSecret: '9946b66251452b145d29d71a6efca18dbf9a7a1d',
-        redirectUrl: 'https://eden-eab1d.firebaseapp.com/__/auth/handler',
-      );
-      final GitHubSignInResult result = await gitHubSignIn.signIn(context);
+      final GitHubSignInResult result = await _gitHubSignIn.signIn(context);
       final AuthCredential credential = GithubAuthProvider.credential(result.token!);
       var user = await _auth.signInWithCredential(credential);
       state = state.copyWith(
@@ -69,7 +69,7 @@ class AuthController extends StateNotifier<AuthState> {
     }
   }
 
-  Future<bool> googleSignout() async {
+  Future<bool> signout(WidgetRef ref) async {
     state = state.copyWith(loading: true, loginState: LoginState.loggingIn);
     try {
       await Future.delayed(const Duration(seconds: 1), () async {

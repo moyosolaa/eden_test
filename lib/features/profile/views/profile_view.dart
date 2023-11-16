@@ -52,9 +52,9 @@ class ProfileView extends ConsumerWidget {
                               ),
                             ),
                             SizedBox(height: 8.v),
-                            Text(provider.user!.user!.displayName!, style: theme.textTheme.titleMedium),
+                            Text(provider.user!.user!.displayName ?? '', style: theme.textTheme.titleMedium),
                             SizedBox(height: 2.v),
-                            Text(provider.user!.user!.email!, style: theme.textTheme.bodySmall),
+                            Text(provider.user!.user!.email ?? 'User email not set', style: theme.textTheme.bodySmall),
                           ],
                         ),
                 ),
@@ -106,7 +106,7 @@ class ProfileView extends ConsumerWidget {
                             onTapSetting: () async {
                               await ref
                                   .read(authProvider.notifier)
-                                  .googleSignout()
+                                  .signout(ref)
                                   .then((value) => value ? onTapLogout(context) : null);
                             },
                           )

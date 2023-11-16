@@ -72,7 +72,7 @@ class LoginView extends ConsumerWidget {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Please sign in with Google instead.'),
+                          content: Text('Please sign in via Google or Github instead.'),
                         ),
                       );
                     },
