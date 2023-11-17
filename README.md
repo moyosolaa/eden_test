@@ -4,6 +4,9 @@
 
 This project is an order tracking app built using Flutter, Firebase Auth, and Ably Realtime. The app allows users to sign in with Google or GitHub using Firebase Auth. Upon signing in, users can view their order details, including real-time updates on the order status.
 
+## Requirement
+![Requirement](https://docs.google.com/document/d/1-leyq0wuoM174Sa3nnpuUK1t5HN0pmQc0xUdHo7FoXA/edit)
+
 ## Features
 
 - User authentication with Google and GitHub via Firebase Auth.
