@@ -73,6 +73,7 @@ To test the real-time order status updates using Ably, follow these steps:
 
 Now, when you run the application, it should receive real-time updates on the order status from the Ably channel.
 
+![Ably Console](assets/screenshots/ably.png)
 
 ## Future Improvements
 
