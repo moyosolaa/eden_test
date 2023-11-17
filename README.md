@@ -1,4 +1,4 @@
-# Eden Application Test - Order Tracking App
+# Eden Test - Order Tracking App
 
 ## Overview
 
