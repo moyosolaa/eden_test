@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:ably_flutter/ably_flutter.dart' as ably;
 import 'package:eden_test/features/auth/controllers/auth_controller.dart';
 import 'package:eden_test/features/orders/models/order_status_model.dart';
+import 'package:eden_test/secrets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final orderProvider = StateNotifierProvider<OrderController, OrderState>((ref) {
@@ -17,7 +18,7 @@ class OrderController extends StateNotifier<OrderState> {
 
   Future<void> createAblyRealtimeInstance(WidgetRef ref) async {
     var clientOptions = ably.ClientOptions(
-      key: 'oiDOrA.HnDEIw:_vcQQwIA8iy1HEPQVKTenBUnaC6LUY7VvueQ7993uZs',
+      key: ablyApiKey,
       clientId: ref.watch(authProvider).user!.user!.uid,
     );
     try {
