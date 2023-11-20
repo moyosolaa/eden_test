@@ -14,7 +14,7 @@ This project is an order tracking app built using Flutter, Firebase Auth, and Ab
 - State management with Riverpod for clean and efficient data handling.
 - Clean and intuitive UI for order details and status tracking.
 
-## Screenshots
+## Screenshots and Demo
 
 <table>
   <tr>
@@ -32,6 +32,8 @@ This project is an order tracking app built using Flutter, Firebase Auth, and Ab
     </td>
   </tr>
 </table>
+
+![Demo](assets/screenshots/Yosola Test Demo.gif)
 
 ## Tech Stack
 
