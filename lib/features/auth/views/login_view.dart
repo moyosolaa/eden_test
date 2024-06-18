@@ -113,13 +113,14 @@ class LoginView extends ConsumerWidget {
                   SignInButton(
                     Buttons.googleDark,
                     onPressed: () async {
-                      await ref.read(authProvider.notifier).googleSignIn(ref).then((value) => value
-                          ? onTapLogIn(context)
-                          : ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Error logging in, please try again.'),
-                              ),
-                            ));
+                      onTapLogIn(context);
+                      // await ref.read(authProvider.notifier).googleSignIn(ref).then((value) => value
+                      //     ? onTapLogIn(context)
+                      //     : ScaffoldMessenger.of(context).showSnackBar(
+                      //         const SnackBar(
+                      //           content: Text('Error logging in, please try again.'),
+                      //         ),
+                      //       ));
                     },
                   ),
                   SizedBox(height: 8.v),

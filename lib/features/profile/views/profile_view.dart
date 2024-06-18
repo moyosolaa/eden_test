@@ -29,34 +29,44 @@ class ProfileView extends ConsumerWidget {
                 SizedBox(height: 8.v),
                 Padding(
                   padding: EdgeInsets.all(23.adaptSize),
-                  child: provider.user == null
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "lbl_profile".tr,
-                                style: CustomTextStyles.titleSmallBold,
-                              ),
-                            ),
-                            SizedBox(height: 16.v),
-                            CustomImageView(
-                              imagePath: provider.user!.user!.photoURL,
-                              height: 100.adaptSize,
-                              width: 100.adaptSize,
-                              radius: BorderRadius.circular(
-                                50.h,
-                              ),
-                            ),
-                            SizedBox(height: 8.v),
-                            Text(provider.user!.user!.displayName ?? '', style: theme.textTheme.titleMedium),
-                            SizedBox(height: 2.v),
-                            Text(provider.user!.user!.email ?? 'User email not set', style: theme.textTheme.bodySmall),
-                          ],
+                  child:
+                      // provider.user == null
+                      //     ? const Center(
+                      //         child: CircularProgressIndicator(),
+                      //       ) :
+                      Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "lbl_profile".tr,
+                          style: CustomTextStyles.titleSmallBold,
                         ),
+                      ),
+                      SizedBox(height: 16.v),
+                      // CustomImageView(
+                      //   imagePath: provider.user!.user!.photoURL,
+                      //   height: 100.adaptSize,
+                      //   width: 100.adaptSize,
+                      //   radius: BorderRadius.circular(
+                      //     50.h,
+                      //   ),
+                      // ),
+                      CircleAvatar(
+                        radius: 50.adaptSize,
+                        child: const Icon(
+                          Icons.person_3_rounded,
+                          size: 50,
+                        ),
+                      ),
+                      SizedBox(height: 8.v),
+                      // Text(provider.user!.user!.displayName ?? '', style: theme.textTheme.titleMedium),
+                      Text('Yosola Adekanmbi O.', style: theme.textTheme.titleMedium),
+                      SizedBox(height: 2.v),
+                      // Text(provider.user!.user!.email ?? 'User email not set', style: theme.textTheme.bodySmall),
+                      Text('adekanmbi.yosola@gmail.com', style: theme.textTheme.bodySmall),
+                    ],
+                  ),
                 ),
                 // SizedBox(height: 31.v),
                 Expanded(
